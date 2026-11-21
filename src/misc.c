@@ -17,10 +17,6 @@
 #include <sanitizer/asan_interface.h>
 #endif
 
-#if defined(USE_STB_SPRINTF)
-#define STB_SPRINTF_IMPLEMENTATION
-#endif
-
 #include "sqlite3.h"
 #include "smartlist.h"
 #include "misc.h"

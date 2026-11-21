@@ -72,11 +72,6 @@ USE_PP_DEBUG ?= 0
 USE_SPECTRE ?= 0
 
 #
-# Prefer 'externals/stb_sprintf.h' over CRT's '*printf()' functions?
-#
-USE_STB_SPRINTF ?= 0
-
-#
 # Python is needed for:
 #   *) .c-file preprocessing.
 #   *) generation of '$(OBJ_DIR)/web-pages-*.c'.
@@ -206,10 +201,6 @@ ifeq ($(USE_SPECTRE),1)
 
 else ifeq ($(USE_CRT_DEBUG),0)
   CFLAGS += -GS-
-endif
-
-ifeq ($(USE_STB_SPRINTF),1)
-  CFLAGS += -DUSE_STB_SPRINTF
 endif
 
 #

@@ -11,6 +11,5 @@ Keep most externals here. Only in source form:
  * `SDRplay/*.h -----------` : The *SDRPlay API* (v. 3.15) `.h`-files from **[SDRplay Ltd](https://www.sdrplay.com)**.
  * `sqlite3.[ch] ----------` : The embeddable **[SQLite](http://www.sqlite.org)** Database Engine. The amalgamated version.
  * `sqlite3-shell.c -------` : The source for the `sqlite3.exe` shell program.
- * `stb_sprintf.h ---------` : A fast single-header `snprintf()` implementation from **[STB](https://github.com/nothings/stb_sprintf)**.
  * `zip.[ch] + miniz.h ----` : A portable simple **[zip library](https://github.com/kuba--/zip)**.
  * `gzip.[ch] -------------` : A **[mini-gzip](https://github.com/wkoszek/mini_gzip)** decompressor function.
