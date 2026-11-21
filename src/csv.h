@@ -2,8 +2,7 @@
  * \ingroup Misc
  * \brief   Reading of "Comma-separated values" (CSV) files
  */
-#ifndef _CSV_H
-#define _CSV_H
+#pragma once
 
 /**
  * The CSV-parser states.
@@ -52,5 +51,3 @@ typedef struct CSV_context {
 int      CSV_init_ctx (struct CSV_context *ctx);
 unsigned CSV_num_fields (struct CSV_context *ctx);
 int      CSV_open_and_parse_file (struct CSV_context *ctx);
-
-#endif /* _CSV_H */
