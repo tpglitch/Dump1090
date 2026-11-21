@@ -1,13 +1,6 @@
 /**
  * For '../packed_test.exe'.
- *
- * Disable some Mongoose features not needed here.
  */
-#undef  MG_ENABLE_EPOLL
-#undef  MG_ENABLE_FILE
-#define MG_ENABLE_EPOLL 0
-#define MG_ENABLE_FILE  0
-
 #include "misc.h"
 #include "mongoose.c"
 
@@ -234,7 +227,7 @@ static bool unload_web_dll (void)
 
 static void check_DLL (const char *dll_basename)
 {
-  mg_file_path dll_fullname;
+  char dll_fullname [MAX_PATH];
 
   snprintf (dll_fullname, sizeof(dll_fullname), "%s\\%s", Modes.where_am_I, dll_basename);
 
@@ -260,9 +253,12 @@ static void check_DLL (const char *dll_basename)
 
 static void init (void)
 {
+  char path [MAX_PATH];
+
   memset (&Modes, '\0', sizeof(Modes));
-  GetModuleFileNameA (NULL, Modes.who_am_I, sizeof(Modes.who_am_I));
-  snprintf (Modes.where_am_I, sizeof(Modes.where_am_I), "%s", dirname(Modes.who_am_I));
+  GetModuleFileNameA (NULL, path, sizeof(path));
+  Modes.who_am_I   = strdup (path);
+  Modes.where_am_I = strdup (dirname(Modes.who_am_I));
 }
 
 int main (void)
@@ -274,6 +270,8 @@ int main (void)
   check_sizes   (mg_unlist_1, mg_unlist_2, mg_unpack_1, mg_unpack_2);
   check_speed   (mg_unlist_1, mg_unlist_2, mg_unpack_1, mg_unpack_2, 1000);
   check_DLL ("web-pages.dll");
+  free (Modes.who_am_I);
+  free (Modes.where_am_I);
   return (g_rc);
 }
 
@@ -296,7 +294,3 @@ DEAD_CODE (const char *, "?", sqlite3_compileoption_get, (int N))
 DEAD_CODE (const char *, "?", trace_strerror, (DWORD err))
 DEAD_CODE (uint32_t,     0,   rtlsdr_last_error, (void))
 
-#if defined(MG_ENABLE_PACKED_FS) && (MG_ENABLE_PACKED_FS == 1)
-  DEAD_CODE (const char *, "?", mg_unpack, (const char *name, size_t *size, time_t *mtime))
-  DEAD_CODE (const char *, "?", mg_unlist, (size_t i))
-#endif

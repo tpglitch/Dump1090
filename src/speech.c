@@ -754,8 +754,5 @@ DEAD_CODE (const char *, "?", sqlite3_compileoption_get, (int N))
 DEAD_CODE (const char *, "?", trace_strerror, (DWORD err))
 DEAD_CODE (uint32_t,     0,   rtlsdr_last_error, (void))
 
-#if defined(MG_ENABLE_PACKED_FS) && (MG_ENABLE_PACKED_FS == 1)
-  DEAD_CODE (const char *, "?", mg_unpack, (const char *name, size_t *size, time_t *mtime))
-  DEAD_CODE (const char *, "?", mg_unlist, (size_t i))
-#endif
-#endif
+#endif /* TEST */
+
