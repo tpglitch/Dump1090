@@ -219,6 +219,11 @@ const wchar_t *utf8_format2 (const char *s, int min_width)
   #pragma warning (disable: 4057 5321)
 #endif
 
+#if defined(USE_STB_SPRINTF)
+  #define STB_SPRINTF_IMPLEMENTATION
+  #include "externals/stb_sprintf.h"
+#endif
+
 static const uint8_t *utf8_tests_1[] = {           // In LaTeX syntax
        { u8"\xC3\x85r\xC3\xB8 Airport" },          // "\AAr\o Airport", Molde, Norway
        { u8"Flor\xC3\xB8 Airport" },               // "Flor\o Airport", Norway

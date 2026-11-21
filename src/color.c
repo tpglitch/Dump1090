@@ -489,18 +489,25 @@ int C_puts (const char *str)
 
 #if defined(TEST)
 
+#if defined(USE_STB_SPRINTF)
+  #define STB_SPRINTF_IMPLEMENTATION
+  #include "externals/stb_sprintf.h"
+#endif
+
 global_data Modes;
 
-void modeS_flogf (FILE *f, _Printf_format_string_ const char *fmt, ...)
+int modeS_flogf (FILE *f, _Printf_format_string_ const char *fmt, ...)
 {
   char    buf [1000];
+  int     len;
   va_list args;
 
   va_start (args, fmt);
-  vsnprintf (buf, sizeof(buf), fmt, args);
+  len = vsnprintf (buf, sizeof(buf), fmt, args);
   va_end (args);
   fputs (buf, stdout);
   (void) f;
+  return (len);
 }
 
 /*

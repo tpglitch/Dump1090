@@ -22,6 +22,25 @@
 #include "fifo.h"
 
 /**
+ * Enable STB `printf()` functions?
+ */
+#if defined(USE_STB_SPRINTF)
+  #undef sprintf
+  #undef snprintf
+  #undef vsnprintf
+
+  #include "externals/stb_sprintf.h"
+
+  #define sprintf(...)                  stbsp_sprintf (__VA_ARGS__)
+  #define snprintf(...)                 stbsp_snprintf (__VA_ARGS__)
+  #define vsnprintf(buf, len, fmt, va)  stbsp_vsnprintf (buf, len, fmt, va)
+
+  #if defined(__clang__) || defined(__MINGW64__)
+    #pragma clang diagnostic ignored "-Wformat"
+  #endif
+#endif
+
+/**
  * Various helper macros.
  */
 #define MODES_NOTUSED(x)   ((void) x)
